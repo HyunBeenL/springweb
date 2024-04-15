@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="org.fullstack4.springmvc.sample.SampleTests" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-04-15T08:43:37" hostname="FULL1-05-06" time="0.011">
+  <properties/>
+  <testcase name="testService()" classname="org.fullstack4.springmvc.sample.SampleTests" time="0.011"/>
+  <system-out><![CDATA[05:43:37  INFO [org.springframework.test.context.support.DefaultTestContextBootstrapper] Loaded default TestExecutionListener class names from location [META-INF/spring.factories]: [org.springframework.test.context.web.ServletTestExecutionListener, org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener, org.springframework.test.context.event.ApplicationEventsTestExecutionListener, org.springframework.test.context.support.DependencyInjectionTestExecutionListener, org.springframework.test.context.support.DirtiesContextTestExecutionListener, org.springframework.test.context.transaction.TransactionalTestExecutionListener, org.springframework.test.context.jdbc.SqlScriptsTestExecutionListener, org.springframework.test.context.event.EventPublishingTestExecutionListener]
+05:43:37  INFO [org.springframework.test.context.support.DefaultTestContextBootstrapper] Using TestExecutionListeners: [org.springframework.test.context.support.DirtiesContextBeforeModesTestExecutionListener@aed0151, org.springframework.test.context.event.ApplicationEventsTestExecutionListener@267bbe1a, org.springframework.test.context.support.DependencyInjectionTestExecutionListener@1f12e153, org.springframework.test.context.support.DirtiesContextTestExecutionListener@389562d6, org.springframework.test.context.event.EventPublishingTestExecutionListener@5a101b1c]
+05:43:37  INFO [org.fullstack4.springmvc.sample.SampleTests] ===============================
+05:43:37  INFO [org.fullstack4.springmvc.sample.SampleTests] sampleService Test : SampleService(sampleDAO=org.fullstack4.springmvc.sample.SampleDAO@71cb3139)
+05:43:37  INFO [org.fullstack4.springmvc.sample.SampleTests] ===============================
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
