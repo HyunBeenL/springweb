@@ -4,6 +4,7 @@ import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.dto.BbsDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.mapper.MemberMapper;
+import org.fullstack4.springmvc.service.MemberServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class MemberController {
 
     @Autowired
-    private MemberMapper memberMapper;
+    private MemberServiceIf MemberService;
     @GetMapping("/list")
     public void list(Model model){
         log.info("=========================");

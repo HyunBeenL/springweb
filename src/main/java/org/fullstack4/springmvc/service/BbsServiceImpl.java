@@ -71,4 +71,5 @@ public class BbsServiceImpl implements BbsServiceIf {
         int result = bbsMapper.delete(idx);
         return result;
     }
+
 }

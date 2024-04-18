@@ -27,6 +27,9 @@
         <span>출력날짜 : ${list.display_date}</span>
     </div>
     <div>
+        <span>출력날짜 : ${list.interest}</span>
+    </div>
+    <div>
         <button type="button" onclick="location.href='/bbs/list'">목록</button>
         <button type="button" onclick="location.href='/bbs/modify?idx=${list.idx}'">수정</button>
         <button type="button" onclick="goDelete()">삭제</button>
@@ -35,7 +38,7 @@
 <script>
     function goDelete(){
         const frm =document.getElementById("frmDelete");
-        let confirm_flag = confirm("게시글 삭제하냐? 두번 안묻는다.");
+        let confirm_flag = confirm("게시글을 삭제하시겠습니까?");
         if(confirm_flag){
             frm.submit();
         }

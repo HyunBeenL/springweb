@@ -27,6 +27,14 @@
         <span>출력날짜 : </span><input type="date" name="display_date" id="display_date" value="${Bbs.display_date}" maxlength="10">
     </div>
     <div>
+        <span>관심사항 : </span>
+        <span>스포츠<input type="checkbox" name="interest" id="interest_0" value="스포츠" /></span>
+        <span>여행<input type="checkbox" name="interest" id="interest_1" value="여행" /></span>
+        <span>영화<input type="checkbox" name="interest" id="interest_2" value="영화" /></span>
+        <span>음악<input type="checkbox" name="interest" id="interest_3" value="음악" /></span>
+
+    </div>
+    <div>
         <button type="submit">수정</button>
     </div>
 

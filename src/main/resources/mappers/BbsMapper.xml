@@ -4,20 +4,20 @@
         "http://mybatis.org/schema/mybatis-3-mapper.dtd">
 <mapper namespace="org.fullstack4.springmvc.mapper.BbsMapper">
     <select id="listAll"  resultType="org.fullstack4.springmvc.domain.BbsVO">
-        select idx,user_id,title,content,display_date,reg_date,modify_date,read_cnt
+        select idx,user_id,title,content,display_date,reg_date,modify_date,read_cnt,interest
         FROM tbl_bbs
         ORDER BY idx DESC
     </select>
 
     <select id="BbsView"  resultType="org.fullstack4.springmvc.domain.BbsVO">
-        select idx,user_id,title,content,display_date,reg_date,modify_date,read_cnt
+        select idx,user_id,title,content,display_date,reg_date,modify_date,read_cnt,interest
         FROM tbl_bbs
         where idx=#{idx}
 
     </select>
 
     <insert id="regist">
-        insert into tbl_bbs(user_id,title,content,display_date,reg_date) values (#{user_id},#{title},#{content},#{display_date},NOW())
+        insert into tbl_bbs(user_id,title,content,display_date,interest,reg_date) values (#{user_id},#{title},#{content},#{display_date},#{interest},NOW())
     </insert>
     <delete id="delete">
         delete from tbl_bbs where idx=${idx}
@@ -28,6 +28,7 @@
                            ,content = #{content}
                            ,display_date = #{display_date}
                            ,modify_date = NOW()
+                           ,interest = #{interest}
         WHERE idx = #{idx}
     </update>
 </mapper>
