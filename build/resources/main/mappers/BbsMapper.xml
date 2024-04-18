@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.BbsMapper">
+    <select id="BbsList"  resultType="org.fullstack4.springmvc.dto.BbsDTO">
+        select idx,user_id,title,content,display_date,reg_date,modify_date,read_cnt
+        FROM tbl_bbs
+    </select>
+
+    <select id="BbsView"  resultType="org.fullstack4.springmvc.dto.BbsDTO">
+        select idx,user_id,title,content,display_date,reg_date,modify_date,read_cnt
+        FROM tbl_bbs
+        where idx=${idx}
+    </select>
+
+    <select id="InsertBbs" resultType="int">
+        insert into tbl_bbs(user_id,title,content,display_date,reg_date)
+        values (${user_id},${title},${content},NOW(),NOW())
+    </select>
+</mapper>

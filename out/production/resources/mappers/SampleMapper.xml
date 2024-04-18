@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.SampleMapper">
+    <select id="showMember"  resultType="org.fullstack4.springmvc.dto.MemberDTO">
+        select user_name,user_id,pwd,addr1,addr2
+        FROM tbl_member
+    </select>
+</mapper>
