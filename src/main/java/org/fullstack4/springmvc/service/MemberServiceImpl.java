@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberServiceIf{
         MemberVO vo = memberMapper.login(dto.getUser_id());
 
         log.info("========================");
-        log.info("=====LoginService=======");
+        log.info("======LoginService======");
         log.info("========================");
         if(vo.getPwd().equals(dto.getPwd())){
             return true;

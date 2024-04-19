@@ -10,6 +10,7 @@
 <html>
 <head>
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -31,39 +32,49 @@
             text-align: center;
         }
 
-        .post-list {
-            list-style: none;
-            padding: 0;
-        }
-
-        .post-list li {
-            margin-bottom: 10px;
-        }
-
-        .post-list li a {
+        .viewdetail{
             text-decoration: none;
-            color: #333;
-            display: block;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .post-list li a:hover {
-            background-color: #f0f0f0;
+            color:black;
         }
 
     </style>
 </head>
 <body>
     <div class="container">
+        <% if(session.getAttribute("user_id") == null){ %>
+        <button class="btn btn-primary" onclick="location.href='/login/login'">로그인</button>
+        <% }else{ %>
+        <button class="btn btn-primary" onclick="location.href='/login/logout'">로그아웃</button>
+        <%}%>
         <h1>게시판</h1>
-        <ul class="post-list">
-        <c:forEach items="${bbsList}" var="list">
-            <li><a href="/bbs/view?idx=${list.idx}">${list.title}</a></li>
-        </c:forEach>
-        </ul>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Reg_Date</th>
+            </tr>
+            </thead>
+            <tbody>
+                <c:forEach items="${bbsList}" var="list">
+                    <tr>
+                        <th scope="row">${list.idx}</th>
+                        <td><a href="/bbs/view?idx=${list.idx}" class="viewdetail">${list.title}</a></td>
+                        <td>${list.reg_date}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+        <nav aria-label="Page navigation example" >
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                <%for(int i =1; i<=10; i++){%>
+                <li class="page-item"><a class="page-link" href="#"><%=i%></a></li>
+                <%}%>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </nav>
+
 
 <%--        <ul class="post-list">--%>
 <%--            <c:forEach items="${bbsList}" var="list">--%>
@@ -71,5 +82,6 @@
 <%--            </c:forEach>--%>
 <%--        </ul>--%>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </body>
 </html>
