@@ -9,9 +9,10 @@ import java.util.List;
 
 @Mapper
 public interface BbsMapper {
-    List<BbsVO> listAll();
+    List<BbsVO> listAll(int startnum,int endnum);
     BbsVO BbsView(int idx);
     int regist(BbsVO bbsvo);
     int delete(int idx);
     int Modify(BbsVO bbsvo);
+    int totalcount();
 }

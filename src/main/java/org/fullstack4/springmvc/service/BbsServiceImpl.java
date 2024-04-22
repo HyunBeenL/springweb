@@ -36,8 +36,10 @@ public class BbsServiceImpl implements BbsServiceIf {
     }
 
     @Override
-    public List<BbsDTO> listAll() {
-        List<BbsDTO> bbsDTOList = bbsMapper.listAll().stream()
+    public List<BbsDTO> listAll(int page) {
+        int startnum = 0+(10*(page-1));
+        int endnum = 10;
+        List<BbsDTO> bbsDTOList = bbsMapper.listAll(startnum,endnum).stream()
                 .map(vo->modelMapper.map(vo,BbsDTO.class))
                 .collect(Collectors.toList());
 
@@ -70,6 +72,12 @@ public class BbsServiceImpl implements BbsServiceIf {
     public int delete(int idx) {
         int result = bbsMapper.delete(idx);
         return result;
+    }
+
+    @Override
+    public int TotalCount() {
+        int totalcount = bbsMapper.totalcount();
+        return totalcount;
     }
 
 }

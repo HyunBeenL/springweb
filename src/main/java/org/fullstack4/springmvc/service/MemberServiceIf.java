@@ -6,4 +6,7 @@ import org.fullstack4.springmvc.dto.MemberDTO;
 
 public interface MemberServiceIf {
     Boolean Login(MemberDTO dto);
+    int Join(MemberDTO dto);
+    int Modify(MemberDTO dto);
+    MemberDTO view(String id);
 }

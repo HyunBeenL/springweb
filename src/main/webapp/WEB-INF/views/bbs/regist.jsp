@@ -21,6 +21,12 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -29,7 +35,7 @@
     <h1>게시글 등록</h1>
 <form name="frmRegist" id="frmRegist" class="row mb-3" method="post" action="/bbs/regist">
     <div class="col-sm-10">
-        <span>아이디 : </span><input type="text" class="form-control" name="user_id" id="user_id" value="${errdto.getUser_id()}" maxlength="20">
+        <span>작성자 : </span><input type="text" class="form-control" name="user_id" id="user_id" value="${sessionScope.user_id}" maxlength="20" readonly>
         <div id="div_err_user_id" style="display:none"></div>
     </div>
     <div class="col-sm-10">

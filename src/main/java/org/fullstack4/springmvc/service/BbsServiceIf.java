@@ -7,8 +7,9 @@ import java.util.List;
 
 public interface BbsServiceIf {
     int regist(BbsDTO dto);
-    List<BbsDTO> listAll();
+    List<BbsDTO> listAll(int page);
     BbsDTO BbsView(int idx);
     int Modify(BbsDTO dto);
     int delete(int idx);
+    int TotalCount();
 }

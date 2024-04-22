@@ -32,13 +32,16 @@ public class BbsController {
     private final BbsServiceIf bbsService;
 
     @GetMapping("/list")
-    public void list(Model model){
+    public void list(Model model
+            , @RequestParam(required = false, defaultValue = "1") int page){
         log.info("=========================");
         log.info("BbsController.list()");
         log.info("=========================");
 
-        List<BbsDTO> dto = bbsService.listAll();
+        List<BbsDTO> dto = bbsService.listAll(page);
+        int totalcount = bbsService.TotalCount();
 
+        model.addAttribute("pagecount", (totalcount/10)+1);
         model.addAttribute("bbsList",dto);
     }
 

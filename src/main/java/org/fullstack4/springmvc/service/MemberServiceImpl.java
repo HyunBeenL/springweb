@@ -32,4 +32,35 @@ public class MemberServiceImpl implements MemberServiceIf{
         }
 
     }
+
+    @Override
+    public int Join(MemberDTO dto) {
+        MemberVO vo = modelMapper.map(dto, MemberVO.class);
+        int result = memberMapper.join(vo);
+        return result;
+    }
+
+    @Override
+    public int Modify(MemberDTO dto) {
+        log.info("========================");
+        log.info("======MemberModify======");
+        log.info("========================");
+
+        MemberVO vo = modelMapper.map(dto, MemberVO.class);
+        int result = memberMapper.modify(vo);
+
+        return result;
+    }
+
+    @Override
+    public MemberDTO view(String id) {
+
+        log.info("========================");
+        log.info("======MemberView======");
+        log.info("========================");
+
+        MemberVO vo = memberMapper.view(id);
+        MemberDTO dto = modelMapper.map(vo, MemberDTO.class);
+        return dto;
+    }
 }

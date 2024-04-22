@@ -8,4 +8,23 @@
         from tbl_member
         where user_id=#{id}
     </select>
+    <insert id="join">
+        INSERT INTO tbl_member(user_id,pwd,user_name,addr1,addr2,birthday,regdate,interest,email)
+        VALUES (#{user_id},#{pwd},#{user_name},#{addr1},#{addr2},#{birthday},NOW(),#{interest},#{email})
+
+    </insert>
+
+    <select id="view" resultType="org.fullstack4.springmvc.domain.MemberVO">
+        select user_id,pwd,user_name,addr1,addr2,birthday,email,regdate
+        from tbl_member
+        where user_id=#{id}
+    </select>
+    <update id="modify">
+        UPDATE tbl_member SET
+        pwd = #{pwd}
+        ,addr1 = #{addr1}
+        ,addr2 = #{addr2}
+        ,email=#{email}
+        where user_id=#{user_id}
+    </update>
 </mapper>

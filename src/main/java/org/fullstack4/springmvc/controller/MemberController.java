@@ -1,6 +1,8 @@
 package org.fullstack4.springmvc.controller;
 
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.springmvc.Common.CookieUtil;
+import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.BbsDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.mapper.MemberMapper;
@@ -13,6 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.lang.reflect.Member;
 
 @Log4j2
 @Controller
@@ -39,7 +46,9 @@ public class MemberController {
         log.info("=========================");
 
 
-        model.addAttribute("user_id",user_id);
+        MemberDTO dto = MemberService.view(user_id);
+
+        model.addAttribute("dto",dto);
 //        model.addAttribute("list",memberMapper.BbsView(user_id));
     }
 
@@ -58,23 +67,42 @@ public class MemberController {
         log.info("=========================");
 
 
+        int result = MemberService.Join(dto);
         return "redirect:/login/login";
 
 
     }
 
     @GetMapping("/modify")
-    public void ModifyGET(){
+    public void ModifyGET(@RequestParam(name="user_id",defaultValue="") String user_id,
+                          Model model){
         log.info("=========================");
         log.info("BbsController.Modifyget()");
         log.info("=========================");
+
+        MemberDTO dto = MemberService.view(user_id);
+
+        model.addAttribute("dto",dto);
     }
 
     @PostMapping("/modify")
-    public void ModifyPost(){
+    public String ModifyPost(MemberDTO dto, Model model, RedirectAttributes redirectAttributes, HttpServletRequest req,HttpServletResponse resp){
         log.info("=========================");
         log.info("BbsController.ModifyPost()");
         log.info("=========================");
+
+        HttpSession session = req.getSession();
+        int result = MemberService.Modify(dto);
+        if(result>0){
+            if(CookieUtil.getCookieValue(req,"user_id") != null) {
+                CookieUtil.setDeleteCookie(resp, "user_id");
+            }
+            session.invalidate();
+            return "redirect:/login/login";
+        }
+        else{
+            return "/member/modify?user_id="+dto.getUser_id();
+        }
     }
 
     @GetMapping("/leave")

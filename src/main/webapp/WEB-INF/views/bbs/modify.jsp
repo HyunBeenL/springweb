@@ -19,6 +19,12 @@
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
     </style>
 </head>
 <body>
@@ -27,7 +33,7 @@
 <form name="frmModify" id="frmModify" method="post" action="/bbs/modify">
     <input type="hidden" id="idx" name="idx" value="${Bbs.idx}">
     <div class="col-sm-10">
-        <span>아이디 : </span><input type="text" class="form-control" name="user_id" id="user_id" value="${Bbs.user_id}" maxlength="20">
+        <span>아이디 : </span><input type="text" class="form-control" name="user_id" id="user_id" value="${Bbs.user_id}" maxlength="20" readonly>
     </div>
     <div class="col-sm-10">
         <span>제목 : </span><input type="text" class="form-control" name="title" id="title" value="${Bbs.title}" maxlength="100">

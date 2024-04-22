@@ -1,4 +1,4 @@
-<%--
+<%@ page import="org.fullstack4.springmvc.Common.CookieUtil" %><%--
   Created by IntelliJ IDEA.
   User: user
   Date: 2024-04-17
@@ -22,10 +22,10 @@
         }
 
         .login-container {
-            width: 300px;
+            width: 500px;
             margin: 100px auto;
             background-color: #fff;
-            padding: 20px;
+            padding: 50px;
             border-radius: 5px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -68,17 +68,26 @@
     </style>
 
 </head>
+
 <body>
+<% String check = "";%>
+<% String id = CookieUtil.getCookieValue(request,"save_id")==null?"":CookieUtil.getCookieValue(request,"save_id");%>
+<% if(CookieUtil.getCookieValue(request,"save_id") != ""){
+    check = "checked"; }%>
 <div class="login-container">
-    <h2>Login</h2>
+    <h2>Login <%=CookieUtil.getCookieValue(request,"save_id")%></h2>
     <form action="/login/login" method="post">
         <div class="form-group">
             <label for="user_id">Id:</label>
-            <input type="text" id="user_id" name="user_id" required>
+            <input type="text" id="user_id" name="user_id" value="<%=id%>" required>
         </div>
         <div class="form-group">
             <label for="pwd">Password:</label>
             <input type="password" id="pwd" name="pwd" required>
+        </div>
+        <div class="form-group">
+            <span>아이디 저장 <input type="checkbox" class="form-check-input" name="save_id" id="save_id" <%=check%>/></span>
+            <span>자동 로그인 <input type="checkbox" class="form-check-input" name="autologin" id="autologin"/></span>
         </div>
         <button type="submit">Login</button>
     </form>

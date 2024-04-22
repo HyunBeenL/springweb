@@ -18,9 +18,11 @@ public class MemberDTO {
     private String addr2;
     private String birthday;
     private String job_code;
+    private String email;
     private int mileage;
+    private String interest;
     private String user_state;
-    private LocalDate reg_date;
+    private LocalDate regdate;
     private LocalDate modify_date;
     private LocalDate pwd_change_date;
     private LocalDate leave_date;
