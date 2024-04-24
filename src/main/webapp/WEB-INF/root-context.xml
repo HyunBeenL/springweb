@@ -4,12 +4,15 @@
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
        xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
                            http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/context
                            https://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd
                            http://www.springframework.org/schema/tx
-                           http://www.springframework.org/schema/tx/spring-tx.xsd"
+                           https://www.springframework.org/schema/tx/spring-tx.xsd
+                           http://www.springframework.org/schema/aop
+                           https://www.springframework.org/schema/aop/spring-aop.xsd"
 >
 <!--    <bean class="org.fullstack4.springmvc.sample.SampleDAO" />-->
 <!--    <bean class="org.fullstack4.springmvc.sample.SampleService" />-->
@@ -49,10 +52,29 @@
     <!--@Transactional 어노테이션 처리-->
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
+    <!-- apspect annotation 사용 설정 -->
+
+    <aop:aspectj-autoproxy/>
+
+    <!--트랜잭션 aop 설정-->
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="regist*" rollback-for="Exception"/>
+            <tx:method name="modify*" rollback-for="Exception"/>
+            <tx:method name="delete*" rollback-for="Exception"/>
+            <tx:method name="reply_regis*" rollback-for="Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <aop:config>
+        <aop:pointcut id="transactionPointcut" expression="within(org.fullstack4.springmvc..*)"/>
+        <aop:advisor id="transactionAdvisor" pointcut-ref="transactionPointcut" advice-ref="txAdvice"/>
+    </aop:config>
 
 
     <mybatis:scan base-package="org.fullstack4.springmvc.mapper"></mybatis:scan>
 
     <context:component-scan base-package="org.fullstack4.springmvc.config"></context:component-scan>
     <context:component-scan base-package="org.fullstack4.springmvc.service"></context:component-scan>
+    <context:component-scan base-package="org.fullstack4.springmvc.aop"></context:component-scan>
 </beans>

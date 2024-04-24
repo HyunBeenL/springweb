@@ -11,7 +11,7 @@ public interface ReplyMapper {
     int regist(ReplyVO vo);
     int modify(ReplyVO vo);
     int update_reply_cnt(int bbs_idx);
-    ReplyVO view(int idx);
-    List<ReplyVO> reply_list();
+    ReplyVO view(int bbs_idx);
+    List<ReplyVO> reply_list(int bbs_idx);
 
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -50,7 +51,16 @@ public class BbsReplyServiceImpl implements BbsReplyServiceIf {
     }
 
     @Override
-    public List<ReplyVO> reply_list() {
-        return null;
+    public List<ReplyDTO> reply_list(int bbs_idx) {
+        List<ReplyDTO> replyDTOList = replyMapper.reply_list(bbs_idx).stream()
+                .map(vo->modelMapper.map(vo,ReplyDTO.class))
+                .collect(Collectors.toList());
+
+        log.info("========================");
+        log.info("BbsReplyServiceImpl >> reply_list : " +replyDTOList.toString());
+        log.info("========================");
+        return replyDTOList;
     }
+
+
 }

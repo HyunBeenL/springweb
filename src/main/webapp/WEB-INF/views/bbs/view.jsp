@@ -75,7 +75,25 @@
 </form>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
+
+    $.ajax({
+        url:"/bbsReply/replyList.dox",
+        dataType:"json",
+        type : "POST",
+        data :{
+            "bbs_idx":${list.idx}
+        },
+        success : function(data) {
+            if(data.result == "sucess") {
+                console.log(data.list);
+            }
+            else{
+                console.log("댓글이 없음");
+            }
+        }
+    });
     function goDelete(){
         const frm =document.getElementById("frmDelete");
         let confirm_flag = confirm("게시글을 삭제하시겠습니까?");

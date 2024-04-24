@@ -8,5 +8,5 @@ import java.util.List;
 public interface BbsReplyServiceIf {
     int reply_regist(ReplyDTO dto);
     int update_reply_cnt(int bbs_idx);
-    List<ReplyVO> reply_list();
+    List<ReplyDTO> reply_list(int bbs_idx);
 }
