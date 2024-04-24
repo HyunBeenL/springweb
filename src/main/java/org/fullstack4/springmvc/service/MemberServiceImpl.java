@@ -4,10 +4,15 @@ package org.fullstack4.springmvc.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.domain.MemberVO;
+import org.fullstack4.springmvc.dto.BbsDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
 import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Log4j2
 @Service
@@ -62,5 +67,21 @@ public class MemberServiceImpl implements MemberServiceIf{
         MemberVO vo = memberMapper.view(id);
         MemberDTO dto = modelMapper.map(vo, MemberDTO.class);
         return dto;
+    }
+
+    @Override
+    public int delete(String id) {
+        int result = memberMapper.delete(id);
+        return result;
+    }
+
+    @Override
+    public List<String> idList() {
+        List<String> idList = memberMapper.idList();
+        List<String> idListformat = new ArrayList<String>();
+        for(int i = 0 ; i <idList.size(); i++){
+            idListformat.add('"'+idList.get(i)+'"');
+        }
+        return idListformat;
     }
 }

@@ -29,6 +29,7 @@ public class BbsDTO {
     @Min(value=0)
     private int read_cnt;
     private String interest;
+    private int reply_cnt;
 
 }
 

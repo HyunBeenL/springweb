@@ -57,6 +57,12 @@
         </tr>
         </tbody>
     </table>
+
+    <table class="table table-bordered" id="reply">
+        <tr>
+            <td>test1</td>
+        </tr>
+    </table>
     <input type="hidden" name="idx" id="idx" value="${list.idx}">
     <div>
         <button type="button" class="btn btn-primary" onclick="location.href='/bbs/list'">목록</button>

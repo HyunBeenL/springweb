@@ -5,6 +5,7 @@ import org.fullstack4.springmvc.Common.CookieUtil;
 import org.fullstack4.springmvc.domain.MemberVO;
 import org.fullstack4.springmvc.dto.BbsDTO;
 import org.fullstack4.springmvc.dto.MemberDTO;
+import org.fullstack4.springmvc.mapper.AreaMapper;
 import org.fullstack4.springmvc.mapper.MemberMapper;
 import org.fullstack4.springmvc.service.MemberServiceIf;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.lang.reflect.Member;
+import java.util.List;
 
 @Log4j2
 @Controller
@@ -28,6 +30,8 @@ public class MemberController {
 
     @Autowired
     private MemberServiceIf MemberService;
+    @Autowired
+    private AreaMapper areaMapper;
     @GetMapping("/list")
     public void list(Model model){
         log.info("=========================");
@@ -53,10 +57,15 @@ public class MemberController {
     }
 
     @GetMapping("/join")
-    public void joinGET(){
+    public void joinGET(Model model){
         log.info("=========================");
         log.info("BbsController.registGet()");
         log.info("=========================");
+
+        List<String> idList = MemberService.idList();
+        List<String> siList = areaMapper.siList();
+
+        model.addAttribute("idList",idList);
     }
 
     @PostMapping("/join")
@@ -105,18 +114,34 @@ public class MemberController {
         }
     }
 
-    @GetMapping("/leave")
-    public void leaveGET(){
+    @GetMapping("/delete")
+    public String deleteGET(@RequestParam(name="user_id",defaultValue="0") String user_id,
+                            Model model, RedirectAttributes redirectAttributes){
         log.info("=========================");
         log.info("MemberController.leave()");
         log.info("=========================");
+        int result = MemberService.delete(user_id);
+        if(result>0) {
+            return "redirect:/bbs/list";
+        }else{
+            return "/member/view?user_id="+user_id;
+        }
     }
 
-    @PostMapping("/leave")
-    public void leavePOST(){
+    @PostMapping("/delete")
+    public String deletePOST(@RequestParam(name="user_id",defaultValue="0") String user_id,
+                           Model model, RedirectAttributes redirectAttributes){
         log.info("==================================");
         log.info("bbsController >> deletePost()");
         log.info("==================================");
+
+        int result = MemberService.delete(user_id);
+        if(result>0) {
+            return "redirect:/bbs/list";
+        }else{
+            return "/member/view?user_id="+user_id;
+        }
+
 
     }
 }

@@ -21,10 +21,12 @@ public class CookieUtil {
     public static String getCookieValue(HttpServletRequest req, String name) {
         String rtnCookie="";
         Cookie[] cookies = req.getCookies();
-        for(Cookie cookie : cookies) {
-            if(name.equals(cookie.getName())) {
-                rtnCookie = cookie.getValue();
-                break;
+        if(cookies != null) {
+            for (Cookie cookie : cookies) {
+                if (name.equals(cookie.getName())) {
+                    rtnCookie = cookie.getValue();
+                    break;
+                }
             }
         }
         return rtnCookie;

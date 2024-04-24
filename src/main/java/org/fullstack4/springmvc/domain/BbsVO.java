@@ -21,4 +21,5 @@ public class BbsVO {
     private LocalDate modify_date;
     private int read_cnt;
     private String interest;
+    private int reply_cnt;
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/schema/mybatis-3-mapper.dtd">
+<mapper namespace="org.fullstack4.springmvc.mapper.AreaMapper">
+    <select id="siList" resultType="String">
+        SELECT distinct si
+        FROM tbl_area
+    </select>
+    <select id="guList" resultType="String">
+        SELECT distinct gu
+        FROM tbl_area
+        where si=#{si}
+    </select>
+    <select id="dongList" resultType="String">
+        SELECT dong
+        FROM tbl_area
+        where si=#{si} and gu=#{gu}
+    </select>
+</mapper>

@@ -2,6 +2,8 @@ package org.fullstack4.springmvc.service;
 
 import lombok.extern.log4j.Log4j2;
 import org.fullstack4.springmvc.dto.BbsDTO;
+import org.fullstack4.springmvc.dto.PageRequestDTO;
+import org.fullstack4.springmvc.dto.PageResponseDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -28,5 +30,28 @@ public class BbsServiceTests {
                 .build();
 
         int result = bbsServiceIf.regist(bbsDTO);
+    }
+
+    @Test
+    public void testBbSTotalCount(){
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(1)
+                .page_size(10)
+                .build();
+        log.info("=================================");
+        log.info(bbsServiceIf.BbsTotalCount(pageRequestDTO));
+        log.info("=================================");
+    }
+
+    @Test
+    public void testBbsListByPage() {
+        PageRequestDTO pageRequestDTO = PageRequestDTO.builder()
+                .page(2)
+                .page_size(10)
+                .build();
+        PageResponseDTO<BbsDTO> responseDTO = bbsServiceIf.bbsListByPage(pageRequestDTO);
+        responseDTO.getDtoList().forEach(
+                vo->log.info(vo)
+        );
     }
 }

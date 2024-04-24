@@ -2,6 +2,8 @@ package org.fullstack4.springmvc.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.fullstack4.springmvc.dto.PageRequestDTO;
+import org.fullstack4.springmvc.dto.PageResponseDTO;
 import org.fullstack4.springmvc.service.BbsServiceIf;
 import org.fullstack4.springmvc.domain.BbsVO;
 import org.fullstack4.springmvc.dto.BbsDTO;
@@ -43,11 +45,25 @@ public class BbsServiceImpl implements BbsServiceIf {
                 .map(vo->modelMapper.map(vo,BbsDTO.class))
                 .collect(Collectors.toList());
 
-
         log.info("========================");
         log.info("BbsServiceImpl >> regist(bbsDTO) : " +bbsDTOList.toString());
         log.info("========================");
         return bbsDTOList;
+    }
+
+    @Override
+    public PageResponseDTO<BbsDTO> bbsListByPage(PageRequestDTO pageRequestDTO) {
+        List<BbsVO> voList = bbsMapper.bbsListByPage(pageRequestDTO);
+        List<BbsDTO> dtoList = voList.stream()
+                .map(vo->modelMapper.map(vo,BbsDTO.class))
+                .collect(Collectors.toList());
+        int total_count = bbsMapper.bbsTotalCount(pageRequestDTO);
+        PageResponseDTO<BbsDTO> responseDTO = PageResponseDTO.<BbsDTO>withAll()
+                .requestDTO(pageRequestDTO)
+                .dtoList(dtoList)
+                .total_count(total_count)
+                .build();
+        return responseDTO;
     }
 
     @Override
@@ -79,5 +95,13 @@ public class BbsServiceImpl implements BbsServiceIf {
         int totalcount = bbsMapper.totalcount();
         return totalcount;
     }
+
+    @Override
+    public int BbsTotalCount(PageRequestDTO requestDTO) {
+        int totalcount = bbsMapper.bbsTotalCount(requestDTO);
+        return totalcount;
+    }
+
+
 
 }

@@ -40,7 +40,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/login", method = {RequestMethod.POST})
-    public String loginPOST(@Valid MemberDTO dto,HttpServletRequest req,HttpServletResponse resp){
+    public String loginPOST(MemberDTO dto,HttpServletRequest req,HttpServletResponse resp){
 
         session = req.getSession();
         log.info("=============================");

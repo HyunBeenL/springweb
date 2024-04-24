@@ -29,7 +29,7 @@
 </head>
 <body>
 <div class="container">
-    <form name="frmDelete" id="frmDelete" method="post" action="/member/delete?id=${sessionScope.user_id}">
+    <form name="frmDelete" id="frmDelete" method="post" action="/member/delete?user_id=${sessionScope.user_id}">
         <table class="table table-bordered">
             <tbody>
             <tr>
